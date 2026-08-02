@@ -1,0 +1,19 @@
+
+
+Create an implementation plan for an agent that fulfills the addresses the shortcomings admonished in the evaluation results in the attached image.
+
+That is an agent with subagents, that uses tool, and context and memory. 
+
+Suggest an interesting agent that would fulfill these requirements.
+
+Pick an agent from below categories:
+
+Sample Agents:
+Agents for Good
+Agents that tackle problems in education, healthcare, or sustainability.
+Enterprise Agents
+Agents designed to improve business workflows, analyze data, or automate customer support.
+Concierge Agents
+Agents useful for individuals in their own lives, to automate meal planning, streamline shopping, plan travel, etc.
+Freestyle Track
+The open category for innovative agents that don't fit neatly into the other tracks. This is your space to experiment, explore, and build something truly unique or unclassifiable.

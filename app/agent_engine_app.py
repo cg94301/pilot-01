@@ -11,6 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 import logging
 import os
 from typing import Any
@@ -18,6 +19,8 @@ from typing import Any
 import vertexai
 from dotenv import load_dotenv
 from google.adk.artifacts import GcsArtifactService, InMemoryArtifactService
+from google.adk.sessions.sqlite_session_service import SqliteSessionService
+from google.adk.sessions.vertex_ai_session_service import VertexAiSessionService
 from google.cloud import logging as google_cloud_logging
 from vertexai.agent_engines.templates.adk import AdkApp
 
@@ -49,14 +52,32 @@ class AgentEngineApp(AdkApp):
     def register_operations(self) -> dict[str, list[str]]:
         """Registers the operations of the Agent."""
         operations = super().register_operations()
-        operations[""] = operations.get("", []) + ["register_feedback"]
+        operations[""] = [*operations.get("", []), "register_feedback"]
         return operations
+
+
+def session_service_builder() -> Any:
+    """Builds session service. Uses local SQLite during tests or local runs, Vertex AI in cloud."""
+    if os.environ.get("INTEGRATION_TEST") == "TRUE" or not os.environ.get(
+        "AGENT_ENGINE_ID"
+    ):
+        db_dir = os.path.join(os.getcwd(), ".session_data")
+        os.makedirs(db_dir, exist_ok=True)
+        return SqliteSessionService(db_path=os.path.join(db_dir, "sessions.db"))
+
+    return VertexAiSessionService(
+        project=os.environ.get("GOOGLE_CLOUD_PROJECT"),
+        location=os.environ.get("GOOGLE_CLOUD_LOCATION"),
+        agent_engine_id=os.environ.get("AGENT_ENGINE_ID"),
+    )
 
 
 gemini_location = os.environ.get("GOOGLE_CLOUD_LOCATION")
 logs_bucket_name = os.environ.get("LOGS_BUCKET_NAME")
+
 agent_engine = AgentEngineApp(
     app=adk_app,
+    session_service_builder=session_service_builder,
     artifact_service_builder=lambda: (
         GcsArtifactService(bucket_name=logs_bucket_name)
         if logs_bucket_name

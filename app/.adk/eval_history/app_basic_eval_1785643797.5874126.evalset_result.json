@@ -1,0 +1,1210 @@
+{
+  "eval_set_result_id": "app_basic_eval_1785643797.5874126",
+  "eval_set_result_name": "app_basic_eval_1785643797.5874126",
+  "eval_set_id": "basic_eval",
+  "eval_case_results": [
+    {
+      "eval_set_file": "basic_eval",
+      "eval_set_id": "basic_eval",
+      "eval_id": "weather_query",
+      "final_eval_status": 1,
+      "eval_metric_results": null,
+      "overall_eval_metric_results": [
+        {
+          "metric_name": "rubric_based_final_response_quality_v1",
+          "threshold": 0.8,
+          "criterion": {
+            "threshold": 0.8,
+            "judgeModelOptions": {
+              "judgeModel": "gemini-3-flash-preview",
+              "numSamples": 1
+            },
+            "rubrics": [
+              {
+                "rubricId": "relevance",
+                "rubricContent": {
+                  "textProperty": "The response directly addresses the user's query."
+                }
+              },
+              {
+                "rubricId": "helpfulness",
+                "rubricContent": {
+                  "textProperty": "The response is helpful and provides useful information."
+                }
+              }
+            ]
+          },
+          "custom_function_path": null,
+          "score": 1.0,
+          "eval_status": 1,
+          "details": {
+            "rubric_scores": [
+              {
+                "rubric_id": "relevance",
+                "rationale": "This is an aggregated score derived from individual entries. Please refer to individual entries in each invocation for actual rationale from the model.",
+                "score": 1.0
+              },
+              {
+                "rubric_id": "helpfulness",
+                "rationale": "This is an aggregated score derived from individual entries. Please refer to individual entries in each invocation for actual rationale from the model.",
+                "score": 1.0
+              }
+            ]
+          }
+        }
+      ],
+      "eval_metric_result_per_invocation": [
+        {
+          "actual_invocation": {
+            "invocation_id": "e-d8c07c54-d445-470e-b0cb-77292192040a",
+            "user_content": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": "What's the weather like in San Francisco?",
+                  "thought": null,
+                  "thought_signature": null,
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "user"
+            },
+            "final_response": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": "The weather in San Francisco for the next three days is expected to be consistently foggy with temperatures around 58°F.\n\n**Weather Forecast:**\n*   **Sunday, Aug 02:** 58°F, Foggy\n*   **Monday, Aug 03:** 58°F, Foggy\n*   **Tuesday, Aug 04:** 58°F, Foggy\n\n**Packing Recommendations:**\nSince it will be cool and foggy, I recommend bringing a light jacket or windbreaker. San Francisco is known for its microclimates and cool evenings, so dressing in layers is always a good idea.",
+                  "thought": null,
+                  "thought_signature": null,
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "model"
+            },
+            "intermediate_data": {
+              "invocation_events": [
+                {
+                  "author": "root_agent",
+                  "content": {
+                    "parts": [
+                      {
+                        "media_resolution": null,
+                        "code_execution_result": null,
+                        "executable_code": null,
+                        "file_data": null,
+                        "function_call": {
+                          "id": "1m2l9zbr",
+                          "args": {
+                            "agent_name": "weather_advisor"
+                          },
+                          "name": "transfer_to_agent",
+                          "partial_args": null,
+                          "will_continue": null
+                        },
+                        "function_response": null,
+                        "inline_data": null,
+                        "text": null,
+                        "thought": null,
+                        "thought_signature": "AY89a1-KNX3-RzWrx2aXXGs31tG6gFBF9n_g709AtQdtEmba_mfYV23gODPDongkgXjiQ-FaYyO70Szxln84AEeh8l_2amiYdWhHFBd9iZ7Q5ULz405G_ht5R5PQFQffT7QDOKeUSg2sLw6V4I8y5LbuBS-dc5_AN2tvXn9Wogljd3JKknS8dNEYYG5exi2dXBUGabFa4XbTRfBi0B8ikRjMFcWeJ58HUxGoPTw5aI5_N-1XTrRdIRxLey5vtA3-vAZCqmSk8DbFqmS90iTFpXJ5zNpdRU2k6uNY8JiKvGDwv8Aqk250VvXZSuCKKEf_UXCsjk9Lu7a4vM9ouSJro5xLYUMu9AjkyhppkQf2-CccyGgtKsh0WIzrfsHMEsJkIadTxiSOg0hi8t_omNJI_nNCUepq2HycsaavhzfDU0YeJ0z7A1ex3bJGHUDFH3Ye2F5Xx5mw5laQ_wtvYZkKavpRjcXTyRW2ffeSmYR4EXlhn8stqK3GJTckqGoVPtHNIf9547Qi6qRmgrM8nqoJK7pHEUJ7TCGCzTbMniafR46fDDJq6iwaPU4S2zGZ0az5HqjsDfiq_YWQdL6MZP179DGXC_OYFoJ_wHbGu_f0lvu_dwYZxAR2ebcx5B-R3E-MVwg59jmUhjr_EYG0HZaeCYT8I1wbpdMUK3aKFBvLQuRm8lcZwag5EE_uyo_-6otwgS8Dyy0=",
+                        "video_metadata": null,
+                        "tool_call": null,
+                        "tool_response": null,
+                        "part_metadata": null
+                      }
+                    ],
+                    "role": "model"
+                  }
+                },
+                {
+                  "author": "root_agent",
+                  "content": {
+                    "parts": [
+                      {
+                        "media_resolution": null,
+                        "code_execution_result": null,
+                        "executable_code": null,
+                        "file_data": null,
+                        "function_call": null,
+                        "function_response": {
+                          "will_continue": null,
+                          "scheduling": null,
+                          "parts": null,
+                          "id": "1m2l9zbr",
+                          "name": "transfer_to_agent",
+                          "response": {
+                            "result": null
+                          }
+                        },
+                        "inline_data": null,
+                        "text": null,
+                        "thought": null,
+                        "thought_signature": null,
+                        "video_metadata": null,
+                        "tool_call": null,
+                        "tool_response": null,
+                        "part_metadata": null
+                      }
+                    ],
+                    "role": "user"
+                  }
+                },
+                {
+                  "author": "weather_advisor",
+                  "content": {
+                    "parts": [
+                      {
+                        "media_resolution": null,
+                        "code_execution_result": null,
+                        "executable_code": null,
+                        "file_data": null,
+                        "function_call": {
+                          "id": "dlhpx2ud",
+                          "args": {
+                            "req": {
+                              "city": "San Francisco",
+                              "days": 3
+                            }
+                          },
+                          "name": "get_weather_forecast",
+                          "partial_args": null,
+                          "will_continue": null
+                        },
+                        "function_response": null,
+                        "inline_data": null,
+                        "text": null,
+                        "thought": null,
+                        "thought_signature": "AY89a18Ij465WzT0GoZvGGr5nCMTHBO7mF4Zj2Y7ckcynk09RTkO4xo8LmJvDA6ndbEbbcX_yP7F_ZGlbRHPP8OsC9LWejjEmYXQooY--3CHGR7yQNBEbKKmHVb54ABnggkBGkVX5CsWJ3E5qqM9LoXnufJKBop1Zx3zJ72IOidyP7bEHkHpy1XVIqdOHJRyJraNm04VXCWFaItF8KC2btTvbMSuF65i7nHCb-o2J74M3bCuor5Tp2nZyqRTjmy2CDBTOk-K24BitnZgHLIIV6S4YJFmSCeVsELiSf101SFD7OJ79Ijg7-siat9wIqge8LisBoLGUD6eiT5lF9zKtEhERDulJiyOSH2kgwzDqEWKtYnUVFw1O_NWDAGPZjh_o85YNQvFQx-Ri1zSVDhWcrftp4CxVbF4c5sQFYhOruJ4aE8B2wbPXlmpWAQyAZVPj8siFzqEcVjNt4mbZMx0CgoSjHKEbzeNgixWqEekvYFT2OBLA9c_pgBYJZRhS13UkHJyCYjJ1qNBQ-jIRE0HGfppzeUlgTJ8e0ZWS5UFfIz5jDsTTOO9lllBZB5s4-aHWZm1pwuAWjk=",
+                        "video_metadata": null,
+                        "tool_call": null,
+                        "tool_response": null,
+                        "part_metadata": null
+                      }
+                    ],
+                    "role": "model"
+                  }
+                },
+                {
+                  "author": "weather_advisor",
+                  "content": {
+                    "parts": [
+                      {
+                        "media_resolution": null,
+                        "code_execution_result": null,
+                        "executable_code": null,
+                        "file_data": null,
+                        "function_call": null,
+                        "function_response": {
+                          "will_continue": null,
+                          "scheduling": null,
+                          "parts": null,
+                          "id": "dlhpx2ud",
+                          "name": "get_weather_forecast",
+                          "response": {
+                            "result": "--- Weather Forecast for San Francisco (3 Days) ---\n- Sunday, Aug 02: Temp: 58F, Condition: foggy\n- Monday, Aug 03: Temp: 58F, Condition: foggy\n- Tuesday, Aug 04: Temp: 58F, Condition: foggy\nAdvisory: Bring a light jacket; expect cool evenings."
+                          }
+                        },
+                        "inline_data": null,
+                        "text": null,
+                        "thought": null,
+                        "thought_signature": null,
+                        "video_metadata": null,
+                        "tool_call": null,
+                        "tool_response": null,
+                        "part_metadata": null
+                      }
+                    ],
+                    "role": "user"
+                  }
+                }
+              ]
+            },
+            "creation_timestamp": 1785643786.5098445,
+            "rubrics": null,
+            "app_details": {
+              "agent_details": {
+                "root_agent": {
+                  "name": "root_agent",
+                  "instructions": "You are the Smart Eco-Travel Concierge Agent, a professional travel assistant designed to make trips green, fun, and efficient.\nYour job is to greet the user, coordinate their requests, and delegate tasks to your subagents:\n1. Delegate route, transit, and carbon footprint checks to the 'route_optimizer' subagent.\n2. Delegate attractions and daily planning tasks to the 'itinerary_planner' subagent.\n3. Delegate weather lookups and gear recommendations to the 'weather_advisor' subagent.\n\nRules:\n- Never make up weather or route facts; always delegate or call the tools.\n- Summarize coordinates nicely for the user, presenting structured, readable options.\n- Keep track of the user's travel preferences (e.g. budget, mode limits) in context.\n\nYou are an agent. Your internal name is \"root_agent\".\n\n\nYou have a list of other agents to transfer to:\n\n\nAgent name: weather_advisor\nAgent description: Provides weather forecasts, warnings, and gear/packing suggestions.\n\n\nAgent name: route_optimizer\nAgent description: Finds route options with costs, durations, and carbon emissions.\n\n\nAgent name: itinerary_planner\nAgent description: Generates daily local itineraries and searches attractions.\n\n\nIf you are the best to answer the question according to your description,\nyou can answer it.\n\nIf another agent is better for answering the question according to its\ndescription, call `transfer_to_agent` function to transfer the question to that\nagent. When transferring, do not generate any text other than the function\ncall.\n\n**NOTE**: the only available agents for `transfer_to_agent` function are\n`itinerary_planner`, `route_optimizer`, `weather_advisor`.\n",
+                  "tool_declarations": [
+                    {
+                      "retrieval": null,
+                      "computer_use": null,
+                      "file_search": null,
+                      "google_search": null,
+                      "google_maps": null,
+                      "code_execution": null,
+                      "enterprise_web_search": null,
+                      "function_declarations": [
+                        {
+                          "description": "Transfer the question to another agent.\n\nThis tool hands off control to another agent when it's more suitable to\nanswer the user's question according to the agent's description.\n\nNote:\n  For most use cases, you should use TransferToAgentTool instead of this\n  function directly. TransferToAgentTool provides additional enum constraints\n  that prevent LLMs from hallucinating invalid agent names.\n\nArgs:\n  agent_name: the agent name to transfer to.\n",
+                          "name": "transfer_to_agent",
+                          "parameters": {
+                            "additional_properties": null,
+                            "defs": null,
+                            "ref": null,
+                            "any_of": null,
+                            "default": null,
+                            "description": null,
+                            "enum": null,
+                            "example": null,
+                            "format": null,
+                            "items": null,
+                            "max_items": null,
+                            "max_length": null,
+                            "max_properties": null,
+                            "maximum": null,
+                            "min_items": null,
+                            "min_length": null,
+                            "min_properties": null,
+                            "minimum": null,
+                            "nullable": null,
+                            "pattern": null,
+                            "properties": {
+                              "agent_name": {
+                                "additional_properties": null,
+                                "defs": null,
+                                "ref": null,
+                                "any_of": null,
+                                "default": null,
+                                "description": null,
+                                "enum": [
+                                  "weather_advisor",
+                                  "route_optimizer",
+                                  "itinerary_planner"
+                                ],
+                                "example": null,
+                                "format": null,
+                                "items": null,
+                                "max_items": null,
+                                "max_length": null,
+                                "max_properties": null,
+                                "maximum": null,
+                                "min_items": null,
+                                "min_length": null,
+                                "min_properties": null,
+                                "minimum": null,
+                                "nullable": null,
+                                "pattern": null,
+                                "properties": null,
+                                "property_ordering": null,
+                                "required": null,
+                                "title": null,
+                                "type": "STRING"
+                              }
+                            },
+                            "property_ordering": null,
+                            "required": [
+                              "agent_name"
+                            ],
+                            "title": null,
+                            "type": "OBJECT"
+                          },
+                          "parameters_json_schema": null,
+                          "response": {
+                            "additional_properties": null,
+                            "defs": null,
+                            "ref": null,
+                            "any_of": null,
+                            "default": null,
+                            "description": null,
+                            "enum": null,
+                            "example": null,
+                            "format": null,
+                            "items": null,
+                            "max_items": null,
+                            "max_length": null,
+                            "max_properties": null,
+                            "maximum": null,
+                            "min_items": null,
+                            "min_length": null,
+                            "min_properties": null,
+                            "minimum": null,
+                            "nullable": null,
+                            "pattern": null,
+                            "properties": null,
+                            "property_ordering": null,
+                            "required": null,
+                            "title": null,
+                            "type": "NULL"
+                          },
+                          "response_json_schema": null,
+                          "behavior": null
+                        }
+                      ],
+                      "google_search_retrieval": null,
+                      "parallel_ai_search": null,
+                      "url_context": null,
+                      "mcp_servers": null
+                    }
+                  ]
+                },
+                "weather_advisor": {
+                  "name": "weather_advisor",
+                  "instructions": "You are a weather and packing advisor subagent.\nYour role is to fetch the weather forecast for the requested destination and days, and provide relevant weather alerts and packing recommendations (e.g. clothing, gear).\nAlways use the get_weather_forecast tool to get accurate forecasts.\n\nYou are an agent. Your internal name is \"weather_advisor\". The description about you is \"Provides weather forecasts, warnings, and gear/packing suggestions.\".\n\n\nYou have a list of other agents to transfer to:\n\n\nAgent name: root_agent\nAgent description: \n\n\nAgent name: route_optimizer\nAgent description: Finds route options with costs, durations, and carbon emissions.\n\n\nAgent name: itinerary_planner\nAgent description: Generates daily local itineraries and searches attractions.\n\n\nIf you are the best to answer the question according to your description,\nyou can answer it.\n\nIf another agent is better for answering the question according to its\ndescription, call `transfer_to_agent` function to transfer the question to that\nagent. When transferring, do not generate any text other than the function\ncall.\n\n**NOTE**: the only available agents for `transfer_to_agent` function are\n`itinerary_planner`, `root_agent`, `route_optimizer`.\n\nIf neither you nor the other agents are best for the question, transfer to your parent agent root_agent.\n",
+                  "tool_declarations": [
+                    {
+                      "retrieval": null,
+                      "computer_use": null,
+                      "file_search": null,
+                      "google_search": null,
+                      "google_maps": null,
+                      "code_execution": null,
+                      "enterprise_web_search": null,
+                      "function_declarations": [
+                        {
+                          "description": "Transfer the question to another agent.\n\nThis tool hands off control to another agent when it's more suitable to\nanswer the user's question according to the agent's description.\n\nNote:\n  For most use cases, you should use TransferToAgentTool instead of this\n  function directly. TransferToAgentTool provides additional enum constraints\n  that prevent LLMs from hallucinating invalid agent names.\n\nArgs:\n  agent_name: the agent name to transfer to.\n",
+                          "name": "transfer_to_agent",
+                          "parameters": {
+                            "additional_properties": null,
+                            "defs": null,
+                            "ref": null,
+                            "any_of": null,
+                            "default": null,
+                            "description": null,
+                            "enum": null,
+                            "example": null,
+                            "format": null,
+                            "items": null,
+                            "max_items": null,
+                            "max_length": null,
+                            "max_properties": null,
+                            "maximum": null,
+                            "min_items": null,
+                            "min_length": null,
+                            "min_properties": null,
+                            "minimum": null,
+                            "nullable": null,
+                            "pattern": null,
+                            "properties": {
+                              "agent_name": {
+                                "additional_properties": null,
+                                "defs": null,
+                                "ref": null,
+                                "any_of": null,
+                                "default": null,
+                                "description": null,
+                                "enum": [
+                                  "root_agent",
+                                  "route_optimizer",
+                                  "itinerary_planner"
+                                ],
+                                "example": null,
+                                "format": null,
+                                "items": null,
+                                "max_items": null,
+                                "max_length": null,
+                                "max_properties": null,
+                                "maximum": null,
+                                "min_items": null,
+                                "min_length": null,
+                                "min_properties": null,
+                                "minimum": null,
+                                "nullable": null,
+                                "pattern": null,
+                                "properties": null,
+                                "property_ordering": null,
+                                "required": null,
+                                "title": null,
+                                "type": "STRING"
+                              }
+                            },
+                            "property_ordering": null,
+                            "required": [
+                              "agent_name"
+                            ],
+                            "title": null,
+                            "type": "OBJECT"
+                          },
+                          "parameters_json_schema": null,
+                          "response": {
+                            "additional_properties": null,
+                            "defs": null,
+                            "ref": null,
+                            "any_of": null,
+                            "default": null,
+                            "description": null,
+                            "enum": null,
+                            "example": null,
+                            "format": null,
+                            "items": null,
+                            "max_items": null,
+                            "max_length": null,
+                            "max_properties": null,
+                            "maximum": null,
+                            "min_items": null,
+                            "min_length": null,
+                            "min_properties": null,
+                            "minimum": null,
+                            "nullable": null,
+                            "pattern": null,
+                            "properties": null,
+                            "property_ordering": null,
+                            "required": null,
+                            "title": null,
+                            "type": "NULL"
+                          },
+                          "response_json_schema": null,
+                          "behavior": null
+                        },
+                        {
+                          "description": "Fetches a multi-day weather forecast with travel recommendations.\n\nArgs:\n    req: Validated request containing city name and forecast length.\n\nReturns:\n    A detailed text report of the forecast and weather advisory.\n",
+                          "name": "get_weather_forecast",
+                          "parameters": {
+                            "additional_properties": null,
+                            "defs": null,
+                            "ref": null,
+                            "any_of": null,
+                            "default": null,
+                            "description": null,
+                            "enum": null,
+                            "example": null,
+                            "format": null,
+                            "items": null,
+                            "max_items": null,
+                            "max_length": null,
+                            "max_properties": null,
+                            "maximum": null,
+                            "min_items": null,
+                            "min_length": null,
+                            "min_properties": null,
+                            "minimum": null,
+                            "nullable": null,
+                            "pattern": null,
+                            "properties": {
+                              "req": {
+                                "additional_properties": null,
+                                "defs": null,
+                                "ref": null,
+                                "any_of": null,
+                                "default": null,
+                                "description": null,
+                                "enum": null,
+                                "example": null,
+                                "format": null,
+                                "items": null,
+                                "max_items": null,
+                                "max_length": null,
+                                "max_properties": null,
+                                "maximum": null,
+                                "min_items": null,
+                                "min_length": null,
+                                "min_properties": null,
+                                "minimum": null,
+                                "nullable": null,
+                                "pattern": null,
+                                "properties": {
+                                  "city": {
+                                    "additional_properties": null,
+                                    "defs": null,
+                                    "ref": null,
+                                    "any_of": null,
+                                    "default": null,
+                                    "description": null,
+                                    "enum": null,
+                                    "example": null,
+                                    "format": null,
+                                    "items": null,
+                                    "max_items": null,
+                                    "max_length": null,
+                                    "max_properties": null,
+                                    "maximum": null,
+                                    "min_items": null,
+                                    "min_length": null,
+                                    "min_properties": null,
+                                    "minimum": null,
+                                    "nullable": null,
+                                    "pattern": null,
+                                    "properties": null,
+                                    "property_ordering": null,
+                                    "required": null,
+                                    "title": null,
+                                    "type": "STRING"
+                                  },
+                                  "days": {
+                                    "additional_properties": null,
+                                    "defs": null,
+                                    "ref": null,
+                                    "any_of": null,
+                                    "default": null,
+                                    "description": null,
+                                    "enum": null,
+                                    "example": null,
+                                    "format": null,
+                                    "items": null,
+                                    "max_items": null,
+                                    "max_length": null,
+                                    "max_properties": null,
+                                    "maximum": null,
+                                    "min_items": null,
+                                    "min_length": null,
+                                    "min_properties": null,
+                                    "minimum": null,
+                                    "nullable": null,
+                                    "pattern": null,
+                                    "properties": null,
+                                    "property_ordering": null,
+                                    "required": null,
+                                    "title": null,
+                                    "type": "INTEGER"
+                                  }
+                                },
+                                "property_ordering": null,
+                                "required": [
+                                  "city"
+                                ],
+                                "title": null,
+                                "type": "OBJECT"
+                              }
+                            },
+                            "property_ordering": null,
+                            "required": [
+                              "req"
+                            ],
+                            "title": null,
+                            "type": "OBJECT"
+                          },
+                          "parameters_json_schema": null,
+                          "response": {
+                            "additional_properties": null,
+                            "defs": null,
+                            "ref": null,
+                            "any_of": null,
+                            "default": null,
+                            "description": null,
+                            "enum": null,
+                            "example": null,
+                            "format": null,
+                            "items": null,
+                            "max_items": null,
+                            "max_length": null,
+                            "max_properties": null,
+                            "maximum": null,
+                            "min_items": null,
+                            "min_length": null,
+                            "min_properties": null,
+                            "minimum": null,
+                            "nullable": null,
+                            "pattern": null,
+                            "properties": null,
+                            "property_ordering": null,
+                            "required": null,
+                            "title": null,
+                            "type": "STRING"
+                          },
+                          "response_json_schema": null,
+                          "behavior": null
+                        }
+                      ],
+                      "google_search_retrieval": null,
+                      "parallel_ai_search": null,
+                      "url_context": null,
+                      "mcp_servers": null
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "expected_invocation": {
+            "invocation_id": "",
+            "user_content": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": "What's the weather like in San Francisco?",
+                  "thought": null,
+                  "thought_signature": null,
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "user"
+            },
+            "final_response": null,
+            "intermediate_data": null,
+            "creation_timestamp": 0.0,
+            "rubrics": null,
+            "app_details": null
+          },
+          "eval_metric_results": [
+            {
+              "metric_name": "rubric_based_final_response_quality_v1",
+              "threshold": 0.8,
+              "criterion": {
+                "threshold": 0.8,
+                "judgeModelOptions": {
+                  "judgeModel": "gemini-3-flash-preview",
+                  "numSamples": 1
+                },
+                "rubrics": [
+                  {
+                    "rubricId": "relevance",
+                    "rubricContent": {
+                      "textProperty": "The response directly addresses the user's query."
+                    }
+                  },
+                  {
+                    "rubricId": "helpfulness",
+                    "rubricContent": {
+                      "textProperty": "The response is helpful and provides useful information."
+                    }
+                  }
+                ]
+              },
+              "custom_function_path": null,
+              "score": 1.0,
+              "eval_status": 1,
+              "details": {
+                "rubric_scores": [
+                  {
+                    "rubric_id": "relevance",
+                    "rationale": "The final answer provides the weather forecast for San Francisco, which is the specific information requested by the user.",
+                    "score": 1.0
+                  },
+                  {
+                    "rubric_id": "helpfulness",
+                    "rationale": "The final answer presents the forecast clearly and includes practical packing recommendations based on the tool's advisory, which is useful for a traveler.",
+                    "score": 1.0
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "session_id": "___eval___session___427244e4-1e61-47f5-b942-786c1cb29261",
+      "session_details": {
+        "id": "___eval___session___427244e4-1e61-47f5-b942-786c1cb29261",
+        "app_name": "app",
+        "user_id": "eval_user",
+        "state": {
+          "__llm_request_key__": "c7e9460b-40b0-48ac-be8d-2c1d4fa120c7"
+        },
+        "events": [
+          {
+            "model_version": null,
+            "content": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": "What's the weather like in San Francisco?",
+                  "thought": null,
+                  "thought_signature": null,
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "user"
+            },
+            "grounding_metadata": null,
+            "partial": null,
+            "turn_complete": null,
+            "finish_reason": null,
+            "error_code": null,
+            "error_message": null,
+            "interrupted": null,
+            "custom_metadata": null,
+            "usage_metadata": null,
+            "live_session_resumption_update": null,
+            "live_session_id": null,
+            "go_away": null,
+            "input_transcription": null,
+            "output_transcription": null,
+            "avg_logprobs": null,
+            "logprobs_result": null,
+            "cache_metadata": null,
+            "citation_metadata": null,
+            "interaction_id": null,
+            "invocation_id": "e-d8c07c54-d445-470e-b0cb-77292192040a",
+            "author": "user",
+            "actions": {
+              "skip_summarization": null,
+              "state_delta": {},
+              "artifact_delta": {},
+              "transfer_to_agent": null,
+              "escalate": null,
+              "requested_auth_configs": {},
+              "requested_tool_confirmations": {},
+              "compaction": null,
+              "end_of_agent": null,
+              "agent_state": null,
+              "rewind_before_invocation_id": null,
+              "render_ui_widgets": null
+            },
+            "long_running_tool_ids": null,
+            "branch": null,
+            "id": "1b8f9c90-dbc6-4d37-a897-cd253014e208",
+            "timestamp": 1785643783.7271829
+          },
+          {
+            "model_version": "gemini-3-flash-preview",
+            "content": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": {
+                    "id": "1m2l9zbr",
+                    "args": {
+                      "agent_name": "weather_advisor"
+                    },
+                    "name": "transfer_to_agent",
+                    "partial_args": null,
+                    "will_continue": null
+                  },
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": null,
+                  "thought": null,
+                  "thought_signature": "AY89a1-KNX3-RzWrx2aXXGs31tG6gFBF9n_g709AtQdtEmba_mfYV23gODPDongkgXjiQ-FaYyO70Szxln84AEeh8l_2amiYdWhHFBd9iZ7Q5ULz405G_ht5R5PQFQffT7QDOKeUSg2sLw6V4I8y5LbuBS-dc5_AN2tvXn9Wogljd3JKknS8dNEYYG5exi2dXBUGabFa4XbTRfBi0B8ikRjMFcWeJ58HUxGoPTw5aI5_N-1XTrRdIRxLey5vtA3-vAZCqmSk8DbFqmS90iTFpXJ5zNpdRU2k6uNY8JiKvGDwv8Aqk250VvXZSuCKKEf_UXCsjk9Lu7a4vM9ouSJro5xLYUMu9AjkyhppkQf2-CccyGgtKsh0WIzrfsHMEsJkIadTxiSOg0hi8t_omNJI_nNCUepq2HycsaavhzfDU0YeJ0z7A1ex3bJGHUDFH3Ye2F5Xx5mw5laQ_wtvYZkKavpRjcXTyRW2ffeSmYR4EXlhn8stqK3GJTckqGoVPtHNIf9547Qi6qRmgrM8nqoJK7pHEUJ7TCGCzTbMniafR46fDDJq6iwaPU4S2zGZ0az5HqjsDfiq_YWQdL6MZP179DGXC_OYFoJ_wHbGu_f0lvu_dwYZxAR2ebcx5B-R3E-MVwg59jmUhjr_EYG0HZaeCYT8I1wbpdMUK3aKFBvLQuRm8lcZwag5EE_uyo_-6otwgS8Dyy0=",
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "model"
+            },
+            "grounding_metadata": null,
+            "partial": null,
+            "turn_complete": null,
+            "finish_reason": "STOP",
+            "error_code": null,
+            "error_message": null,
+            "interrupted": null,
+            "custom_metadata": {
+              "__llm_request_key__": "5bee54ec-2643-46ac-98d4-c46ad38f417c"
+            },
+            "usage_metadata": {
+              "cache_tokens_details": null,
+              "cached_content_token_count": null,
+              "candidates_token_count": 22,
+              "candidates_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 22
+                }
+              ],
+              "prompt_token_count": 516,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 516
+                }
+              ],
+              "thoughts_token_count": 107,
+              "tool_use_prompt_token_count": null,
+              "tool_use_prompt_tokens_details": null,
+              "total_token_count": 645,
+              "traffic_type": "ON_DEMAND"
+            },
+            "live_session_resumption_update": null,
+            "live_session_id": null,
+            "go_away": null,
+            "input_transcription": null,
+            "output_transcription": null,
+            "avg_logprobs": null,
+            "logprobs_result": null,
+            "cache_metadata": null,
+            "citation_metadata": null,
+            "interaction_id": null,
+            "invocation_id": "e-d8c07c54-d445-470e-b0cb-77292192040a",
+            "author": "root_agent",
+            "actions": {
+              "skip_summarization": null,
+              "state_delta": {
+                "__llm_request_key__": "5bee54ec-2643-46ac-98d4-c46ad38f417c"
+              },
+              "artifact_delta": {},
+              "transfer_to_agent": null,
+              "escalate": null,
+              "requested_auth_configs": {},
+              "requested_tool_confirmations": {},
+              "compaction": null,
+              "end_of_agent": null,
+              "agent_state": null,
+              "rewind_before_invocation_id": null,
+              "render_ui_widgets": null
+            },
+            "long_running_tool_ids": [],
+            "branch": null,
+            "id": "2c91689a-2d96-4e0e-8f77-d723875fba30",
+            "timestamp": 1785643783.7300792
+          },
+          {
+            "model_version": null,
+            "content": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": {
+                    "will_continue": null,
+                    "scheduling": null,
+                    "parts": null,
+                    "id": "1m2l9zbr",
+                    "name": "transfer_to_agent",
+                    "response": {
+                      "result": null
+                    }
+                  },
+                  "inline_data": null,
+                  "text": null,
+                  "thought": null,
+                  "thought_signature": null,
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "user"
+            },
+            "grounding_metadata": null,
+            "partial": null,
+            "turn_complete": null,
+            "finish_reason": null,
+            "error_code": null,
+            "error_message": null,
+            "interrupted": null,
+            "custom_metadata": null,
+            "usage_metadata": null,
+            "live_session_resumption_update": null,
+            "live_session_id": null,
+            "go_away": null,
+            "input_transcription": null,
+            "output_transcription": null,
+            "avg_logprobs": null,
+            "logprobs_result": null,
+            "cache_metadata": null,
+            "citation_metadata": null,
+            "interaction_id": null,
+            "invocation_id": "e-d8c07c54-d445-470e-b0cb-77292192040a",
+            "author": "root_agent",
+            "actions": {
+              "skip_summarization": null,
+              "state_delta": {},
+              "artifact_delta": {},
+              "transfer_to_agent": "weather_advisor",
+              "escalate": null,
+              "requested_auth_configs": {},
+              "requested_tool_confirmations": {},
+              "compaction": null,
+              "end_of_agent": null,
+              "agent_state": null,
+              "rewind_before_invocation_id": null,
+              "render_ui_widgets": null
+            },
+            "long_running_tool_ids": null,
+            "branch": null,
+            "id": "72bf63f9-44ad-4ea8-85a0-dd82059b1ba5",
+            "timestamp": 1785643786.5104678
+          },
+          {
+            "model_version": "gemini-3-flash-preview",
+            "content": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": {
+                    "id": "dlhpx2ud",
+                    "args": {
+                      "req": {
+                        "city": "San Francisco",
+                        "days": 3
+                      }
+                    },
+                    "name": "get_weather_forecast",
+                    "partial_args": null,
+                    "will_continue": null
+                  },
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": null,
+                  "thought": null,
+                  "thought_signature": "AY89a18Ij465WzT0GoZvGGr5nCMTHBO7mF4Zj2Y7ckcynk09RTkO4xo8LmJvDA6ndbEbbcX_yP7F_ZGlbRHPP8OsC9LWejjEmYXQooY--3CHGR7yQNBEbKKmHVb54ABnggkBGkVX5CsWJ3E5qqM9LoXnufJKBop1Zx3zJ72IOidyP7bEHkHpy1XVIqdOHJRyJraNm04VXCWFaItF8KC2btTvbMSuF65i7nHCb-o2J74M3bCuor5Tp2nZyqRTjmy2CDBTOk-K24BitnZgHLIIV6S4YJFmSCeVsELiSf101SFD7OJ79Ijg7-siat9wIqge8LisBoLGUD6eiT5lF9zKtEhERDulJiyOSH2kgwzDqEWKtYnUVFw1O_NWDAGPZjh_o85YNQvFQx-Ri1zSVDhWcrftp4CxVbF4c5sQFYhOruJ4aE8B2wbPXlmpWAQyAZVPj8siFzqEcVjNt4mbZMx0CgoSjHKEbzeNgixWqEekvYFT2OBLA9c_pgBYJZRhS13UkHJyCYjJ1qNBQ-jIRE0HGfppzeUlgTJ8e0ZWS5UFfIz5jDsTTOO9lllBZB5s4-aHWZm1pwuAWjk=",
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "model"
+            },
+            "grounding_metadata": null,
+            "partial": null,
+            "turn_complete": null,
+            "finish_reason": "STOP",
+            "error_code": null,
+            "error_message": null,
+            "interrupted": null,
+            "custom_metadata": {
+              "__llm_request_key__": "8362b83e-9c68-43a8-b570-25c50b738d96"
+            },
+            "usage_metadata": {
+              "cache_tokens_details": null,
+              "cached_content_token_count": null,
+              "candidates_token_count": 25,
+              "candidates_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 25
+                }
+              ],
+              "prompt_token_count": 564,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 564
+                }
+              ],
+              "thoughts_token_count": 107,
+              "tool_use_prompt_token_count": null,
+              "tool_use_prompt_tokens_details": null,
+              "total_token_count": 696,
+              "traffic_type": "ON_DEMAND"
+            },
+            "live_session_resumption_update": null,
+            "live_session_id": null,
+            "go_away": null,
+            "input_transcription": null,
+            "output_transcription": null,
+            "avg_logprobs": null,
+            "logprobs_result": null,
+            "cache_metadata": null,
+            "citation_metadata": null,
+            "interaction_id": null,
+            "invocation_id": "e-d8c07c54-d445-470e-b0cb-77292192040a",
+            "author": "weather_advisor",
+            "actions": {
+              "skip_summarization": null,
+              "state_delta": {
+                "__llm_request_key__": "8362b83e-9c68-43a8-b570-25c50b738d96"
+              },
+              "artifact_delta": {},
+              "transfer_to_agent": null,
+              "escalate": null,
+              "requested_auth_configs": {},
+              "requested_tool_confirmations": {},
+              "compaction": null,
+              "end_of_agent": null,
+              "agent_state": null,
+              "rewind_before_invocation_id": null,
+              "render_ui_widgets": null
+            },
+            "long_running_tool_ids": [],
+            "branch": null,
+            "id": "415223c8-2571-47ce-a712-027247a9a0c8",
+            "timestamp": 1785643786.514517
+          },
+          {
+            "model_version": null,
+            "content": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": {
+                    "will_continue": null,
+                    "scheduling": null,
+                    "parts": null,
+                    "id": "dlhpx2ud",
+                    "name": "get_weather_forecast",
+                    "response": {
+                      "result": "--- Weather Forecast for San Francisco (3 Days) ---\n- Sunday, Aug 02: Temp: 58F, Condition: foggy\n- Monday, Aug 03: Temp: 58F, Condition: foggy\n- Tuesday, Aug 04: Temp: 58F, Condition: foggy\nAdvisory: Bring a light jacket; expect cool evenings."
+                    }
+                  },
+                  "inline_data": null,
+                  "text": null,
+                  "thought": null,
+                  "thought_signature": null,
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "user"
+            },
+            "grounding_metadata": null,
+            "partial": null,
+            "turn_complete": null,
+            "finish_reason": null,
+            "error_code": null,
+            "error_message": null,
+            "interrupted": null,
+            "custom_metadata": null,
+            "usage_metadata": null,
+            "live_session_resumption_update": null,
+            "live_session_id": null,
+            "go_away": null,
+            "input_transcription": null,
+            "output_transcription": null,
+            "avg_logprobs": null,
+            "logprobs_result": null,
+            "cache_metadata": null,
+            "citation_metadata": null,
+            "interaction_id": null,
+            "invocation_id": "e-d8c07c54-d445-470e-b0cb-77292192040a",
+            "author": "weather_advisor",
+            "actions": {
+              "skip_summarization": null,
+              "state_delta": {},
+              "artifact_delta": {},
+              "transfer_to_agent": null,
+              "escalate": null,
+              "requested_auth_configs": {},
+              "requested_tool_confirmations": {},
+              "compaction": null,
+              "end_of_agent": null,
+              "agent_state": null,
+              "rewind_before_invocation_id": null,
+              "render_ui_widgets": null
+            },
+            "long_running_tool_ids": null,
+            "branch": null,
+            "id": "7883c35b-fe15-4c92-9869-6acf3da28db7",
+            "timestamp": 1785643788.176609
+          },
+          {
+            "model_version": "gemini-3-flash-preview",
+            "content": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": "The weather in San Francisco for the next three days is expected to be consistently foggy with temperatures around 58°F.\n\n**Weather Forecast:**\n*   **Sunday, Aug 02:** 58°F, Foggy\n*   **Monday, Aug 03:** 58°F, Foggy\n*   **Tuesday, Aug 04:** 58°F, Foggy\n\n**Packing Recommendations:**\nSince it will be cool and foggy, I recommend bringing a light jacket or windbreaker. San Francisco is known for its microclimates and cool evenings, so dressing in layers is always a good idea.",
+                  "thought": null,
+                  "thought_signature": null,
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "model"
+            },
+            "grounding_metadata": null,
+            "partial": null,
+            "turn_complete": null,
+            "finish_reason": "STOP",
+            "error_code": null,
+            "error_message": null,
+            "interrupted": null,
+            "custom_metadata": {
+              "__llm_request_key__": "c7e9460b-40b0-48ac-be8d-2c1d4fa120c7"
+            },
+            "usage_metadata": {
+              "cache_tokens_details": null,
+              "cached_content_token_count": null,
+              "candidates_token_count": 134,
+              "candidates_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 134
+                }
+              ],
+              "prompt_token_count": 777,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 777
+                }
+              ],
+              "thoughts_token_count": null,
+              "tool_use_prompt_token_count": null,
+              "tool_use_prompt_tokens_details": null,
+              "total_token_count": 911,
+              "traffic_type": "ON_DEMAND"
+            },
+            "live_session_resumption_update": null,
+            "live_session_id": null,
+            "go_away": null,
+            "input_transcription": null,
+            "output_transcription": null,
+            "avg_logprobs": null,
+            "logprobs_result": null,
+            "cache_metadata": null,
+            "citation_metadata": null,
+            "interaction_id": null,
+            "invocation_id": "e-d8c07c54-d445-470e-b0cb-77292192040a",
+            "author": "weather_advisor",
+            "actions": {
+              "skip_summarization": null,
+              "state_delta": {
+                "__llm_request_key__": "c7e9460b-40b0-48ac-be8d-2c1d4fa120c7"
+              },
+              "artifact_delta": {},
+              "transfer_to_agent": null,
+              "escalate": null,
+              "requested_auth_configs": {},
+              "requested_tool_confirmations": {},
+              "compaction": null,
+              "end_of_agent": null,
+              "agent_state": null,
+              "rewind_before_invocation_id": null,
+              "render_ui_widgets": null
+            },
+            "long_running_tool_ids": null,
+            "branch": null,
+            "id": "794094cc-9d23-400f-966b-cad38642b0e5",
+            "timestamp": 1785643788.1786304
+          }
+        ],
+        "last_update_time": 1785643788.1786304
+      },
+      "user_id": "eval_user"
+    }
+  ],
+  "creation_timestamp": 1785643797.5874126
+}
