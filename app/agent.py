@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import asyncio
+import json
 import logging
 import os
 import re
@@ -24,7 +26,7 @@ from google.adk.apps.llm_event_summarizer import LlmEventSummarizer
 from google.adk.models import Gemini
 from google.genai import types
 
-from app.tools import get_attractions, get_eco_routes, get_weather_forecast
+from app.tools import book_trip, get_attractions, get_eco_routes, get_weather_forecast
 
 # Configure Google Cloud credentials and locations
 _, project_id = google.auth.default()
@@ -36,8 +38,14 @@ os.environ["GOOGLE_GENAI_USE_VERTEXAI"] = "True"
 logger = logging.getLogger("agent_observability")
 logger.setLevel(logging.INFO)
 
+# Blacklist words for safety/policy guardrails
+BLACKLIST_TERMS = ["exploit", "hack", "malware", "steal", "hijack"]
+
+# Global set to keep references to running background tasks to prevent garbage collection
+_background_tasks = set()
+
 # ==============================================================================
-# Observability: PII Redaction & Intent vs. Outcome Callbacks
+# Observability: PII Redaction, Intent/Outcome, & Safety Guardrails
 # ==============================================================================
 
 
@@ -61,56 +69,135 @@ def redact_pii(text: str) -> str:
     return text
 
 
-def before_agent_callback(*args, **kwargs) -> None:
-    """Logs the start of an agent invocation with redacted inputs."""
+def before_agent_callback(*args, **kwargs) -> str | None:
+    """Logs the start of an agent invocation with redacted inputs and safety check."""
     ctx = kwargs.get("callback_context") or (args[0] if args else None)
     if not ctx:
-        return
+        return None
+
     user_input = redact_pii(str(ctx.user_content))
-    logger.info(
-        f"[INTENT] Invoking agent: {ctx.agent_name} | User ID: {ctx.user_id} | Input: {user_input}"
-    )
+
+    # 1. Structured JSON Logging for Intent
+    log_data = {
+        "event": "agent_invocation_start",
+        "agent_name": ctx.agent_name,
+        "user_id": ctx.user_id,
+        "session_id": ctx.session.id,
+        "input": user_input,
+    }
+    logger.info(json.dumps(log_data))
+
+    # 2. Guardrails: Safety / Policy Check
+    for term in BLACKLIST_TERMS:
+        if term in user_input.lower():
+            logger.warning(
+                json.dumps(
+                    {
+                        "event": "guardrail_violation",
+                        "term": term,
+                        "user_id": ctx.user_id,
+                        "session_id": ctx.session.id,
+                    }
+                )
+            )
+            # Returning a string blocks agent execution and sends this message directly
+            return "Policy Violation: Your request contains terms that violate our travel planning safety policies."
+
+    return None
 
 
 def after_agent_callback(*args, **kwargs) -> None:
-    """Logs the end of an agent invocation with redacted outputs."""
+    """Logs the end of an agent invocation, performs post-execution audit, and background memory task."""
     ctx = kwargs.get("callback_context") or (args[0] if args else None)
     if not ctx:
         return
+
     last_event_str = ""
     if ctx.session.events:
         last_event = ctx.session.events[-1]
         last_event_str = redact_pii(str(last_event.content))
-    logger.info(
-        f"[OUTCOME] Completed agent: {ctx.agent_name} | User ID: {ctx.user_id} | Last Output: {last_event_str}"
-    )
+
+    # 1. Structured JSON Logging for Outcome
+    log_data = {
+        "event": "agent_invocation_complete",
+        "agent_name": ctx.agent_name,
+        "user_id": ctx.user_id,
+        "session_id": ctx.session.id,
+        "last_output": last_event_str,
+    }
+    logger.info(json.dumps(log_data))
+
+    # 2. Context & Memory: Asynchronous Memory Consolidation
+    # Schedule memory consolidation in the background to prevent blocking the UI
+    async def consolidate_memory():
+        try:
+            await ctx.add_session_to_memory()
+            logger.info(
+                json.dumps(
+                    {
+                        "event": "memory_consolidation_success",
+                        "session_id": ctx.session.id,
+                        "user_id": ctx.user_id,
+                    }
+                )
+            )
+        except Exception as e:
+            logger.error(
+                json.dumps(
+                    {
+                        "event": "memory_consolidation_error",
+                        "session_id": ctx.session.id,
+                        "error": str(e),
+                    }
+                )
+            )
+
+    # Trigger memory consolidation task in the background without awaiting it
+    task = asyncio.create_task(consolidate_memory())
+    _background_tasks.add(task)
+    task.add_done_callback(_background_tasks.discard)
 
 
 def before_tool_callback(*args, **kwargs) -> None:
-    """Logs the initiation of a tool invocation."""
+    """Logs the initiation of a tool invocation in structured JSON."""
     ctx = kwargs.get("callback_context") or (args[0] if args else None)
     if not ctx:
         return
-    logger.info(
-        f"[INTENT] Agent {ctx.agent_name} calling tool for function call ID: {ctx.function_call_id}"
-    )
+    log_data = {
+        "event": "tool_execution_start",
+        "agent_name": ctx.agent_name,
+        "function_call_id": ctx.function_call_id,
+        "user_id": ctx.user_id,
+    }
+    logger.info(json.dumps(log_data))
 
 
 def after_tool_callback(*args, **kwargs) -> None:
-    """Logs the completion of a tool invocation."""
+    """Logs the completion of a tool invocation in structured JSON."""
     ctx = kwargs.get("callback_context") or (args[0] if args else None)
     if not ctx:
         return
-    logger.info(
-        f"[OUTCOME] Agent {ctx.agent_name} completed tool for function call ID: {ctx.function_call_id}"
-    )
+    log_data = {
+        "event": "tool_execution_complete",
+        "agent_name": ctx.agent_name,
+        "function_call_id": ctx.function_call_id,
+        "user_id": ctx.user_id,
+    }
+    logger.info(json.dumps(log_data))
 
 
 # ==============================================================================
-# Shared Model Configuration
+# Models (Strategic Routing Config)
 # ==============================================================================
 
-model_inst = Gemini(
+# Highly performant Pro model for planning, coordination, and high-stakes tasks
+pro_model = Gemini(
+    model="gemini-3.1-pro-preview",
+    retry_options=types.HttpRetryOptions(attempts=3),
+)
+
+# Lightweight, low-latency Flash model for specific sub-tasks
+flash_model = Gemini(
     model="gemini-3-flash-preview",
     retry_options=types.HttpRetryOptions(attempts=3),
 )
@@ -121,7 +208,7 @@ model_inst = Gemini(
 
 weather_advisor = Agent(
     name="weather_advisor",
-    model=model_inst,
+    model=flash_model,
     instruction=(
         "You are a weather and packing advisor subagent.\n"
         "Your role is to fetch the weather forecast for the requested destination and days, "
@@ -138,7 +225,7 @@ weather_advisor = Agent(
 
 route_optimizer = Agent(
     name="route_optimizer",
-    model=model_inst,
+    model=flash_model,
     instruction=(
         "You are a routing and transit carbon footprint optimization subagent.\n"
         "Your role is to find transportation options between origin and destination.\n"
@@ -156,7 +243,7 @@ route_optimizer = Agent(
 
 itinerary_planner = Agent(
     name="itinerary_planner",
-    model=model_inst,
+    model=pro_model,
     instruction=(
         "You are a local itinerary and sightseeing planner subagent.\n"
         "Your role is to discover attractions and activities in the requested city and organize them into daily schedules.\n"
@@ -177,19 +264,23 @@ itinerary_planner = Agent(
 
 root_agent = Agent(
     name="root_agent",
-    model=model_inst,
+    model=pro_model,
     instruction=(
         "You are the Smart Eco-Travel Concierge Agent, a professional travel assistant designed to make trips green, fun, and efficient.\n"
         "Your job is to greet the user, coordinate their requests, and delegate tasks to your subagents:\n"
         "1. Delegate route, transit, and carbon footprint checks to the 'route_optimizer' subagent.\n"
         "2. Delegate attractions and daily planning tasks to the 'itinerary_planner' subagent.\n"
-        "3. Delegate weather lookups and gear recommendations to the 'weather_advisor' subagent.\n\n"
+        "3. Delegate weather lookups and gear recommendations to the 'weather_advisor' subagent.\n"
+        "4. Book a trip using the 'book_trip' tool. IMPORTANT: Since booking is a high-stakes action, "
+        "always clearly confirm the selection with the user first, then invoke book_trip. "
+        "If you request booking, ADK will run human confirmation. Follow the system's confirmation outcome.\n\n"
         "Rules:\n"
         "- Never make up weather or route facts; always delegate or call the tools.\n"
         "- Summarize coordinates nicely for the user, presenting structured, readable options.\n"
         "- Keep track of the user's travel preferences (e.g. budget, mode limits) in context."
     ),
     sub_agents=[weather_advisor, route_optimizer, itinerary_planner],
+    tools=[book_trip],
     before_agent_callback=before_agent_callback,
     after_agent_callback=after_agent_callback,
 )
@@ -198,7 +289,7 @@ root_agent = Agent(
 # Event Compaction (Memory Management)
 # ==============================================================================
 
-compaction_summarizer = LlmEventSummarizer(llm=model_inst)
+compaction_summarizer = LlmEventSummarizer(llm=flash_model)
 events_compaction_config = EventsCompactionConfig(
     summarizer=compaction_summarizer,
     compaction_interval=5,

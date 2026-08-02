@@ -19,6 +19,8 @@ from typing import Any
 import vertexai
 from dotenv import load_dotenv
 from google.adk.artifacts import GcsArtifactService, InMemoryArtifactService
+from google.adk.memory.in_memory_memory_service import InMemoryMemoryService
+from google.adk.memory.vertex_ai_memory_bank_service import VertexAiMemoryBankService
 from google.adk.sessions.sqlite_session_service import SqliteSessionService
 from google.adk.sessions.vertex_ai_session_service import VertexAiSessionService
 from google.cloud import logging as google_cloud_logging
@@ -72,12 +74,27 @@ def session_service_builder() -> Any:
     )
 
 
+def memory_service_builder() -> Any:
+    """Builds memory service. Uses local InMemoryMemoryService during tests or local runs, Vertex AI in cloud."""
+    if os.environ.get("INTEGRATION_TEST") == "TRUE" or not os.environ.get(
+        "AGENT_ENGINE_ID"
+    ):
+        return InMemoryMemoryService()
+
+    return VertexAiMemoryBankService(
+        project=os.environ.get("GOOGLE_CLOUD_PROJECT"),
+        location=os.environ.get("GOOGLE_CLOUD_LOCATION"),
+        agent_engine_id=os.environ.get("AGENT_ENGINE_ID"),
+    )
+
+
 gemini_location = os.environ.get("GOOGLE_CLOUD_LOCATION")
 logs_bucket_name = os.environ.get("LOGS_BUCKET_NAME")
 
 agent_engine = AgentEngineApp(
     app=adk_app,
     session_service_builder=session_service_builder,
+    memory_service_builder=memory_service_builder,
     artifact_service_builder=lambda: (
         GcsArtifactService(bucket_name=logs_bucket_name)
         if logs_bucket_name
